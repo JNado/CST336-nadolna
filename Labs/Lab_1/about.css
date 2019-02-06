@@ -1,0 +1,30 @@
+#title {
+    text-align: center;
+}
+
+#menu {
+    text-align: center;
+    transition: transform .2s;
+}
+
+.menuitem {
+    display: inline;
+    padding: 25px;
+    /*transition: transform .2s;*/
+}
+
+.menuitem:hover {
+    transform: scale(1.5);
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+#footer {
+    text-align: center;
+}
+
+#curr {
+    text-decoration: overline;
+}

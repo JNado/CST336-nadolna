@@ -1,12 +1,25 @@
 .flex-container {
     display: flex;
     flex-direction: column;
-    border: solid;
 }
 
 .body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border: solid;
+}
+
+button {
+    position: fixed;
+    bottom: 10px;
+    right:5px;
+}
+
+button img {
+    height: 20px;
+    width: 15px;
+}
+
+.left-upper {
+    width: 50%;
 }

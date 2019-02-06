@@ -1,0 +1,39 @@
+body {
+    background-color: lightpink;
+}
+
+#name {
+    font-family: 'Libre Baskerville', serif;
+    text-align: center;
+    text-decoration: underline;
+}
+
+#curr {
+    text-decoration: overline;
+}
+
+#menu:hover {
+    transform: scale(1.2);
+}
+
+#menu {
+    text-align: center;
+}
+
+#menu h3 {
+    display: inline;
+    padding: 20px;
+}
+
+#content {
+    text-align: center;
+}
+
+.contents {
+    display: inline-block;
+    margin-bottom: 5%;
+}
+
+#footer {
+    text-align: center;
+}

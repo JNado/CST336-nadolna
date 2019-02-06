@@ -1,0 +1,21 @@
+body {
+    text-align: center;
+    background-color: cyan;
+}
+
+#menu h3:hover {
+    transform: scale(1.2);
+}
+
+#menu {
+    display: inline;
+    padding: 25px;
+}
+
+img {
+    border-radius: 50px;
+}
+
+a {
+    text-decoration: none;
+}

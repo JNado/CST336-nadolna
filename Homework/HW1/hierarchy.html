@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Domain Name System - Hierarchy</title>
+    <link rel="stylesheet" href="hw1.css">
+</head>
+
+<body>
+    <h1>Domain Name System - Hierarchy</h1>
+
+    <div id="menu">
+        <h3><a href="hw1.html">Home</a></h3>
+        <h3><a href="decent.html">Decentralized</a></h3>
+        <h3><a href="private.html">Private DNS</a></h3>
+    </div>
+
+    <p>
+        The Domain Name System is a hierarchical system. This means that there are different levels, and each level has a function. <br><br> The easiest way to describe the DNS hierarchy is to describe the path of a query. <br><br> An user makes a query
+        that contains a URL to the root DNS server, which is the highest level of DNS. The root server may or may not already know the IP address that that URL translates to, and if it doesn't know it forwards it to the level below it. That level is that
+        of the authoritative name servers, each of which belongs to a specific Domain Name Space. The authoritative name servers are either going to know the translation or are going to forward it to the lower level domain name servers, which are the
+        next lower level of the hierarchy. These servers are the lowest level we shall discuss here, and are practically guarenteed to know the translation. <br><br> Now that the translation has been found, the DNS query can return the IP address that
+        corresponds to the queried URL to the user, and they can continue surfing the Web.
+    </p>
+
+    <img src="400px-Example_of_an_iterative_DNS_resolver.svg.png" alt="Hierarchy" width=400 height=400>
+    <h4><a href="https://en.wikipedia.org/wiki/Domain_Name_System#Structure">Source</a></h4>
+</body>
+
+</html>

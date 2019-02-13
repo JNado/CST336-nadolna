@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> </title>
+</head>
+
+<body>
+    <div id="hellacool">
+        <h2 class="label">Weekdays: </h2>
+        <h3 id="sucks">Monday</h3>
+        <h3 id="doesntsuck">Tuesday</h3>
+        <h2 class="label">Weekend:</h2>
+        <h3>Saturday</h3>
+        <h3>Sunday</h3>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $("document").ready(function() {
+            $("#sucks").css("color", "red");
+            $(".label").css("font-size", "37px")
+            
+            $("#doesntsuck").click ( function() {
+                $("#doesntsuck").animate( { color: green });
+            });
+        });
+    </script>
+</body>
+
+</html>

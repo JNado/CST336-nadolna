@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Lab 3</title>
+        <link rel="stylesheet" href="lab3.css" type="text/css" />
+    </head>
+    <body>
+        <h1>CST336 Questionnaire</h1>
+        
+        <br><br>
+        
+        <div class="questions">
+            <label for="q1"></label>
+            <p id="q1">Question 1: What is 2 + 2?</p>
+            <input type="radio" id="item1" name="answers1" value="2">
+            <label for="item1">2</label>
+            <input type="radio" id="item2" name="answers1" value="4">
+            <label for="item2">4</label>
+            <input type="radio" id="item3" name="answers1" value="6">
+            <label for="item3">6</label>
+            <input type="radio" id="item4" name="answers1" value="8">
+            <label for="item4">8</label>
+        </div>
+        
+        <br>
+        
+        <div class="questions">
+            <label for="q2"></label>
+            <p id="q2">Question 2: Which shape is round?</p>
+            <input type="radio" id="item1" name="answers2" value="triangle">
+            <label for="item1">triangle</label>
+            <input type="radio" id="item2" name="answers2" value="square">
+            <label for="item2">square</label>
+            <input type="radio" id="item3" name="answers2" value="circle">
+            <label for="item3">circle</label>
+            <input type="radio" id="item4" name="answers2" value="rhombus">
+            <label for="item4">rhombus</label>
+        </div>
+        
+        <br>
+        
+        <div class="questions">
+            <label for="q3"></label>
+            <p id="q3">Question 3: Which shape has 4 sides?</p>
+            <input type="radio" id="item1" name="answers3" value="hexagon">
+            <label for="item1">hexagon</label>
+            <input type="radio" id="item2" name="answers3" value="circle">
+            <label for="item2">circle</label>
+            <input type="radio" id="item3" name="answers3" value="triangle">
+            <label for="item3">triangle</label>
+            <input type="radio" id="item4" name="answers3" value="rhombus">
+            <label for="item4">rhombus</label>
+        </div>
+        
+        <br>
+        
+        <div class="questions">
+            <label for="q4"></label>
+            <p id="q4">Question 4: SchteeeeeEEEEEeeeeeeEEEEEEEEEEEeeeeve?</p>
+            <input type="radio" id="item1" name="answers4" value="schteve">
+            <label for="item1">schteve</label>
+            <input type="radio" id="item2" name="answers4" value="mitch">
+            <label for="item2">mitch</label>
+            <input type="radio" id="item3" name="answers4" value="lizsch">
+            <label for="item3">lizsch</label>
+            <input type="radio" id="item4" name="answers4" value="bruv">
+            <label for="item4">bruv</label>
+        </div>
+
+        <br>
+        
+        <div class="questions">
+            <label for="q5"></label>
+            <p id="q5">Question 5: Can kangaroos hop backwards?</p>
+            <input type="radio" id="item1" name="answers5" value="Yes">
+            <label for="item1">Yes</label>
+            <input type="radio" id="item2" name="answers5" value="No">
+            <label for="item2">No</label>
+        </div>
+
+        <br>
+        
+        <div class="questions">
+            <label for="q6"></label>
+            <p id="q6">Question 6: What is 2 + 3?</p>
+            <input type="radio" id="item1" name="answers6" value="3">
+            <label for="item1">3</label>
+            <input type="radio" id="item2" name="answers6" value="5">
+            <label for="item2">5</label>
+            <input type="radio" id="item3" name="answers6" value="7">
+            <label for="item3">7</label>
+            <input type="radio" id="item4" name="answers6" value="9">
+            <label for="item4">9</label>
+        </div>
+        
+        <br><br>
+        
+        <input type="button" value="Submit" onclick="validateAnswers()" id="score"/>
+        <label for="score"></label>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            function validateAnswers() {
+                var r1 = document.getElementsByName("answers1");
+                var r2 = document.getElementsByName("answers2");
+                var r3 = document.getElementsByName("answers3");
+                var r4 = document.getElementsByName("answers4");
+                var r5 = document.getElementsByName("answers5");
+                var r6 = document.getElementsByName("answers6");
+                var numCorrect = 0.0;
+                
+                for (var i = 0, length = r1.length; i < length; i++) {
+                    if (r1[i].checked && r1[i].value === "4") {
+                        $("label[for='q1']").html("Correct");
+                        $("label[for='q1']").css("background-color", "green");
+                        $("label[for='q1']").css("padding-left", "30px");
+                        $("label[for='q1']").css("padding-right", "30px");
+                        numCorrect++;
+                        break;
+                    } else {
+                        $("label[for='q1']").html("Incorrect");
+                        $("label[for='q1']").css("background-color", "red");
+                        $("label[for='q1']").css("padding-left", "30px");
+                        $("label[for='q1']").css("padding-right", "30px");
+                    }
+                }
+                
+                for (var i = 0, length = r2.length; i < length; i++) {
+                    if (r2[i].checked && r2[i].value === "circle") {
+                        $("label[for='q2']").html("Correct");
+                        $("label[for='q2']").css("background-color", "green");
+                        $("label[for='q2']").css("padding-left", "30px");
+                        $("label[for='q2']").css("padding-right", "30px");
+                        numCorrect++;
+                        break;
+                    } else {
+                        $("label[for='q2']").html("Incorrect");
+                        $("label[for='q2']").css("background-color", "red");
+                        $("label[for='q2']").css("padding-left", "30px");
+                        $("label[for='q2']").css("padding-right", "30px");
+                    }
+                }
+                
+                for (var i = 0, length = r3.length; i < length; i++) {
+                    if (r3[i].checked && r3[i].value === "rhombus") {
+                        $("label[for='q3']").html("Correct");
+                        $("label[for='q3']").css("background-color", "green");
+                        $("label[for='q3']").css("padding-left", "30px");
+                        $("label[for='q3']").css("padding-right", "30px");
+                        numCorrect++;
+                        break;
+                    } else {
+                        $("label[for='q3']").html("Incorrect");
+                        $("label[for='q3']").css("background-color", "red");
+                        $("label[for='q3']").css("padding-left", "30px");
+                        $("label[for='q3']").css("padding-right", "30px");
+                    }
+                }
+                
+                for (var i = 0, length = r4.length; i < length; i++) {
+                    if (r4[i].checked && r4[i].value === "schteve") {
+                        $("label[for='q4']").html("Correct");
+                        $("label[for='q4']").css("background-color", "green");
+                        $("label[for='q4']").css("padding-left", "30px");
+                        $("label[for='q4']").css("padding-right", "30px");
+                        numCorrect++;
+                        break;
+                    } else {
+                        $("label[for='q4']").html("Incorrect");
+                        $("label[for='q4']").css("background-color", "red");
+                        $("label[for='q4']").css("padding-left", "30px");
+                        $("label[for='q4']").css("padding-right", "30px");
+                    }
+                }
+                
+                for (var i = 0, length = r5.length; i < length; i++) {
+                    if (r5[i].checked && r5[i].value === "No") {
+                        $("label[for='q5']").html("Correct");
+                        $("label[for='q5']").css("background-color", "green");
+                        $("label[for='q5']").css("padding-left", "30px");
+                        $("label[for='q5']").css("padding-right", "30px");
+                        numCorrect++;
+                        break;
+                    } else {
+                        $("label[for='q5']").html("Incorrect");
+                        $("label[for='q5']").css("background-color", "red");
+                        $("label[for='q5']").css("padding-left", "30px");
+                        $("label[for='q5']").css("padding-right", "30px");
+                    }
+                }
+                
+                for (var i = 0, length = r6.length; i < length; i++) {
+                    if (r6[i].checked && r6[i].value === "5") {
+                        $("label[for='q6']").html("Correct");
+                        $("label[for='q6']").css("background-color", "green");
+                        $("label[for='q6']").css("padding-left", "30px");
+                        $("label[for='q6']").css("padding-right", "30px");
+                        numCorrect++;
+                        break;
+                    } else {
+                        $("label[for='q6']").html("Incorrect");
+                        $("label[for='q6']").css("background-color", "red");
+                        $("label[for='q6']").css("padding-left", "30px");
+                        $("label[for='q6']").css("padding-right", "30px");
+                    }
+                }
+                
+                var hold = numCorrect/6.0 * 100;
+                var truncHold = Math.floor(hold * 100) / 100;
+                
+                if (truncHold >= 90) {
+                    alert("Congratulations! You scored a " + truncHold);
+                }
+                
+                $("label[for='score']").html("Score: " + truncHold);
+            }
+        </script>
+    </body>
+</html>

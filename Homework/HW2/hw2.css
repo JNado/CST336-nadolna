@@ -1,0 +1,37 @@
+body {
+    background-color: yellow;
+    margin: 5%;
+}
+
+h2 {
+    font-family: sans-serif;
+    text-align: center;
+    margin: 7%;
+}
+
+label {
+    font-family: sans-serif;
+    font-size: 16px;
+    background-color: black;
+    color: white;
+    padding: 2%;
+}
+
+h4 {
+    background-color: purple;
+    color: yellow;
+    text-align: center;
+    padding: 1%;
+}
+
+textarea {
+    background-color: green;
+    text-align: center;
+    margin: 3%;
+}
+
+button {
+    background-color: red;
+    text-align: center;
+    margin: 13%;
+}

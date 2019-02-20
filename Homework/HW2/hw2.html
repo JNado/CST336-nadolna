@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Homework 2</title>
+    <link rel="stylesheet" href="hw2.css" type="text/css" />
+</head>
+
+<body>
+    <h2>CST336 Questionnaire</h2>
+    <br>
+
+    <h4>How many chucks can a woodchuck chuck?</h4>
+    <label for="chucks">Pick one:</label>
+    <select name="chucks" id="chucks">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+
+
+    <h4>If a woodchuck could chuck wood?</h4>
+    <label for="woodchuck">Enter answer:</label>
+    <textarea name="woodchuck" rows="8" cols="30" id="woodchuck"></textarea>
+    
+    <br><br>
+    <label for="dontclick">Please don't click this button</label>
+    <button type="button" onclick="validate()" id="dontclick">Don't click me!</button>
+
+    <script>
+        function validate() {
+            var hold = document.getElementById("chucks");
+            var index = hold.selectedIndex;
+            var val = hold.options[index].value;
+            var rand = (Math.random() * 19) + 1;
+            
+            if (val === "1") {
+                document.getElementById("woodchuck").value = val * rand;
+            } else {
+                document.getElementById("woodchuck").value = val * rand * rand;
+            }
+        }
+    </script>
+
+</body>
+
+</html>

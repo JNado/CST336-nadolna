@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Test Form</title>
+    <link rel="stylesheet" href="elementexample.css">
+</head>
+
+<body>
+    <form>
+        <div class="input-group">
+            <label for="feedback">Holy Smokes and Wallaby Walker</label><br><br>
+            <input type="radio" id="item1" name="degreeChoices" value="1">
+            <label for="item1">Mitch</label>
+            <br>
+            <input type="radio" id="item2" name="degreeChoices" value="2">
+            <label for="item2">Mentos</label>
+            <br>
+            <input type="radio" id="item3" name="degreeChoices" value="3">
+            <label for="item3">Lizsch</label>
+            <br>
+            <input type="radio" id="item4" name="degreeChoices" value="4">
+            <label for="item4">SchteeEEeeEEeeEEEeeeeeeeve Jr</label>
+            <br>
+            <input type="radio" id="item5" name="degreeChoices" value="5">
+            <label for="item5">Frickface</label>
+        </div>
+        <div class="input-group">
+            <input type="button" value="Schwartz?" onclick="checkData()" />
+        </div>
+    </form>
+
+    <script>
+        function checkData() {
+            var radios = document.getElementsByName('degreeChoices');
+            var guesses = 0;
+            
+            if (guesses === 5) {
+                alert("You must be grinding my gears.");
+            }
+
+            for (var i = 0, length = radios.length; i < length; i++) {
+                if (radios[i].checked && radios[i].value === "4") {
+                    alert("You freakin did it!");
+                    break;
+                } else if (radios[i].checked && radios[i].value != "4") {
+                    alert("WooooooOOOOOOOOooooooooOOOOOOOooooooolllll actuallllllyyyyyyyy, that name is unavailable!");
+                    break;
+                }
+            }
+            
+            guesses++;
+        }
+    </script>
+</body>
+
+</html>

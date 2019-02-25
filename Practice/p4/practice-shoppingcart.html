@@ -1,0 +1,167 @@
+<html>
+
+<head>
+    <title>Shopping Cart</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1> Spring Break Shopping </h1>
+
+        <table>
+            <tr>
+                <th>Product</th>
+                <th>Unit <br> Price</th>
+                <th> Quantity </th>
+                <th>Total</th>
+            </tr>
+            <tr>
+                <td>Microfiber Beach Towel</td>
+                <td>$30</td>
+                <td><input id="towel" type="text" size="5"></td>
+                <td><label id="towelprice"></label></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Sunscreen 100SPF, 120ml</td>
+                <td>$10</td>
+                <td><input id="sunscreen" type="text" size="5"></td>
+                <td><label id="screenprice"></label></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Ipanema Flip-flop Sandals </td>
+                <td>$20</td>
+                <td><input id="flipflop" type="text" size="5"></td>
+                <td><label id="ffprice"></label></td>
+                <td></td>
+            </tr>
+
+            <tr>
+                <td>Shipping</td>
+                <td><label id="ship"></label></td>
+                <td></td>
+                <td id="shipping"></td>
+            </tr>
+
+            <tr>
+                <td>Subtotal</td>
+                <td><label id="sub"></label></td>
+                <td></td>
+                <td id="subtotal"></td>
+            </tr>
+
+            <tr>
+                <td>Tax (10%)</td>
+                <td><label id="taxes"></label></td>
+                <td></td>
+                <td id="tax"></td>
+            </tr>
+
+            <tr>
+                <td>Total</td>
+                <td><label id="tot"></label></td>
+                <td></td>
+                <td id="total"></td>
+            </tr>
+
+        </table>
+
+        <h3>Shipping & Handling</h3>
+        <select id="shipping">
+        <option value="0">Select one</option>
+        <option value="15">Next-day Delivery: $15:00</option>
+        <option value="10">Three-day Delivery: $10.00</option>
+        <option value="5">Regular (5-8 Days): $5.00</option>
+    </select>
+        <br><br>
+
+        <input type="checkbox" id="accept" value="accept">
+        <span id="acceptspan">I accept the terms of this purchase.</span>
+        <br>
+
+        <button onclick="confirmPurchase()">"CONFIRM PURCHASE"</button>
+    </div>
+    
+    <script>
+        $("#towel").change(calcTowelTotal);
+        $("#sunscreen").change(calcScreenTotal);
+        $("#flipflop").change(calcFFTotal);
+        $("select").change(addShipping);
+
+        var overallTotal = 0;
+
+        function confirmPurchase() {
+            if ($("select").val() === "0") {
+                alert("No shipping method selected!");
+            }
+            else if (!$("#accept").is(":checked")) {
+                alert("You must accept the terms of this purchase.");
+                $("#acceptspan").css("color", "red");
+            }
+        }
+
+        function addShipping() {
+            var hold = parseFloat($("select").val());
+
+            if (hold > 0) {
+                overallTotal = overallTotal + hold;
+                $("#ship").html("$" + hold);
+                buildTotal();
+            }
+        }
+
+        function buildTotal() {
+            $("#sub").html("$" + overallTotal);
+            $("#taxes").html("$" + (overallTotal * 0.1));
+            $("#tot").html("$" + (overallTotal + (overallTotal * 0.1)));
+        }
+
+        function calcFFTotal() {
+            var quant = parseFloat($("#flipflop").val());
+
+            var total = quant * 20.0;
+
+            overallTotal = overallTotal + total;
+
+            $("#ffprice").html("$" + total);
+
+            buildTotal();
+        }
+
+        function calcScreenTotal() {
+            var quant = parseFloat($("#sunscreen").val());
+
+            var total = quant * 10.0;
+
+            overallTotal = overallTotal + total;
+
+            $("#screenprice").html("$" + total);
+
+            buildTotal();
+        }
+
+        function calcTowelTotal() {
+            var quant = parseFloat($("#towel").val());
+
+            var total = quant * 30.0;
+
+            overallTotal = overallTotal + total;
+
+            $("#towelprice").html("$" + total);
+
+            buildTotal();
+        }
+    </script>
+
+</body>
+
+</html>

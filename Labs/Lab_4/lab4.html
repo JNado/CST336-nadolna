@@ -1,0 +1,127 @@
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <title>AJAX: Sign Up Page</title>
+
+</head>
+
+<body id="dummybodyid">
+  <div class="container-fluid">
+    <h1> Sign Up Form </h1>
+
+    <form>
+      <fieldset>
+        <legend>Sign Up</legend>
+        <br>
+        <div><label>First Name:</label><input id="fname" type="text"></div>
+        <div><label>Last Name:</label><input id="lname" type="text"></div>
+        <div><label>Email:</label><input id="email" type="text"></div>
+        <div><label>Phone Number:</label><input id="pnum" type="text"></div>
+        <div><label>Zip Code:</label><input id="zcode" type="text"></div>
+        <div><label>City:</label></div><input id="city" type="text"></div>
+        <div><label>Latitude:</label></div><input id="lat" type="text"></div>
+        <div><label>Longitude:</label></div><input id="long" type="text"></div>
+        <div><label>State:</label><input id="state" type="text"></div>
+        <div><label>Select a County:</label><select id="counties"></select></div>
+        <div><label>Desired Username:</label><input id="usern" type="text"></div>
+        <div><label>Password:</label><input id="pword" type="password"></div>
+        <div><label>Type Password Again:</label><input id="pword2" type="password"></div>
+        <div><input id="submit" type="submit" value="Sign up!"></div>
+      </fieldset>
+    </form>
+  </div>
+
+  <script>
+    $("#zcode").change(getCity);
+    $("#state").change(getState);
+    $("#usern").change(checkUN);
+
+    $("form").submit(function(e) {
+      var ipw = $("#pword").val();
+      var ipw2 = $("#pword2").val();
+
+      if (ipw !== ipw2) {
+        $("#temppw").remove();
+        $("#pword2").after("<label id='temppw' style='color:red'>Passwords don't match!</label>")
+        e.preventDefault(e);
+      }
+    });
+
+    function checkUN() {
+      var rand = Math.floor((Math.random() * 100) + 1);
+
+      if (rand > 50) {
+        $("#tempun").remove();
+        $("#usern").after("<label id='tempun' style='color:green'>Username available</label>")
+      }
+      else {
+        $("#tempun").remove();
+        $("#usern").after("<label id='tempun' style='color:red'>Username unavailable</label>")
+      }
+    }
+
+    function getCity() {
+      $.ajax({
+        type: 'GET',
+        url: 'http://itcdland.csumb.edu/~milara/ajax/cityInfoByZip.php',
+        dataType: 'json',
+        data: {
+          'zip': $("#zcode").val()
+        },
+
+        success: function(data) {
+          // console.log(data);
+
+          if (data === false) {
+            $("#zcode").after("<label id='temp'>Zipcode not found!</label>");
+          }
+          else {
+            $("#temp").remove();
+            $("#city").val(data["city"]);
+            $("#lat").val(data["latitude"]);
+            $("#long").val(data["longitude"]);
+          }
+        }
+
+      });
+    };
+
+    function getState() {
+      $.ajax({
+        type: 'GET',
+        url: 'http://itcdland.csumb.edu/~milara/ajax/countyList.php',
+        dataType: 'json',
+        data: {
+          'state': $("#state").val()
+        },
+
+        success: function(data) {
+          // console.log(data);
+
+          if (data.length === 0) {
+            $("#state").after("<label id='temps'>State not found!</label>");
+          }
+          else {
+            $("#temps").remove();
+            for (var i = 0; i < data.length; i++) {
+              $("#counties").append($("<option></option")
+                .attr("value", data[i]["county"])
+                .text(data[i]["county"]));
+            }
+          }
+        }
+
+      });
+    };
+  </script>
+</body>
+
+</html>

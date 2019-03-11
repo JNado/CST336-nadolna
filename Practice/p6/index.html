@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Practice 6: Discount Code</title>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <h1> Discount Shopping </h1>
+
+        <table id="prod">
+            <tr>
+                <th width="150">Product</th>
+                <th width="50">Unit <br> Price</th>
+                <th width="50">Quantity</th>
+            </tr>
+            
+            <tr>
+                <td id="produ">Product</th>
+                <td id="unit">Unit <br> Price</th>
+                <td id="quan">Quantity</th>
+            </tr>
+        </table>
+        <br><br>
+        <label>Promo Code:</label><input id="promo" type="text" size="15"><button id="btn" onclick="apiCall()">Find Discount</button><br>
+        
+        <div>
+            <label id="subtotal"></label><br>
+            <label id="tax"></label><br>
+            <label id="total"></label>
+        </div>
+    </div>
+</body>
+<script>
+var maths = 0;
+    $.ajax({
+        type: "post",
+        url: "./api/getRandomProduct.php",
+        dataType: "json",
+        data: {},
+
+        success: function(data, status) {
+            console.log(data);
+            
+            maths = data[1] * data[2];
+            
+            $("#produ").html(data[0]);
+            $("#unit").html(data[1]);
+            $("#quan").html(data[2]);
+        },
+        complete: function(data, status) {
+            //alert(status);
+        }
+    });
+
+    function apiCall() {
+        $.ajax({
+        type: "post",
+        url: "./api/applyPromoCode.php",
+        dataType: "json",
+        data: {
+            "promo" : $("#promo").val()
+        },
+
+        success: function(data, status) {
+            console.log(data);
+            
+            
+            var maths2 = (maths * 1.0)* (data[2]/100);
+            var tax = (maths2 * .1);
+            var total = maths2 + tax;
+            
+            $("#subtotal").html("Subtotal: $" + maths2.toFixed(2));
+            $("#tax").html("Tax: $" + tax.toFixed(2));
+            $("#total").html("Total: $" + total.toFixed(2));
+        },
+        complete: function(data, status) {
+            if (status === "parsererror") {
+                alert("Invalid promo code.");
+            }
+        }
+    });   
+    }
+</script>
+
+</html>

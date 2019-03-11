@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <title>Lab 5: Sign Up Page</title>
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <top class="title">Sign Up Page</top>
+        <hr id="line">
+        <form>
+            <label>Username: </label>
+            <input id="usr" type="text" name="username">
+            <br><br>
+            <label>Password: </label>
+            <input id="pw" type="password" name="password">
+            <br><br>
+            <label id="rand">Click to generate a random password.</label>
+            <button id="genBtn" type="button">Generate</button>
+            <br>
+            <button id="btn" type="button">Login</button>
+        </form>
+    </div>
+    <script>
+        $("#btn").click(function(z) {
+            $.ajax({
+                type: "POST",
+                url: "./api.php",
+                dataType: "json",
+                data: {
+                    'usr': $("#usr").val(),
+                    'pw': $("#pw").val()
+                },
+                success: function(data) {
+                    //check to see if username is taken
+                    for (var i = 0; i < data.length; i++) {
+                        if (data[i] == "uerror") {
+                            alert("The username you have selected has already been taken by another user. Please choose another.");
+                        }
+                    }
+                    //check to see if username is in password
+                    for (var i = 0; i < data.length; i++) {
+                        if (data[i] === "error") {
+                            alert("Your password contains your username, please remedy that.");
+                        }
+                    }
+                },
+                complete: function(status) { //optional, used for debugging purposes
+                    console.log(status);
+                }
+
+            });
+        });
+        //action performed when "Generate" button is pressed
+        $("#genBtn").click(function() {
+            $.ajax({
+                type: "POST",
+                url: "./api.php",
+                dataType: "json",
+                data: {},
+                success: function(data) {
+                    console.log(data);
+                    //get random password from array and display in html
+                    $("#pw").val(data[data.length - 1]);
+                },
+                complete: function(status) { //optional, used for debugging purposes
+                    console.log(status);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

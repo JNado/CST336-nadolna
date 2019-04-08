@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title> Hangman</title>
+        
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link  href="css/styles.css" rel="stylesheet" type="text/css" />
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        
+    <script>
+        /*global $*/
+      
+        var count =0;
+        function getWord(){
+            
+            //Ajax call to get the word_id and its length from the database 
+              $.ajax({
+                    type: "GET",
+                    url: "api/get_word_api.php",
+                    dataType: "json",
+                    data: { },
+                success: function(data,status) {
+                    console.log(data);
+                     $("#wordId").val(data.word_id);
+         
+                },
+                complete: function(data,status) { 
+                //alert(status);
+                }
+
+                });//ajax
+        }
+        
+        $(document).ready(function(){
+         
+               
+              //getWord Function gets the random word from the database.    
+              getWord();
+        
+              //Ajax call to check the letter in the selected word  
+              $("#submit").click( function(){  
+                  
+                  $.ajax({
+                    type: "get",
+                    url: "api/check_word.php",
+                    dataType: "json",
+                    data: { 
+                         "wordid" : $("#wordId").val(),
+                         "letterid" : $("#letter").val()
+                        },
+                    success: function(data,status) {
+                        //for testing
+                        console.log(data);
+                        console.log($("#wordId").length);
+                        $("#guess").append($("#letter").val());
+                        
+                        for(var i = 0; i < $("#wordId").val().length; i++){
+                             if(!data[0]["word"].includes($("#letter").val())){
+                                 count++;
+                                $("#man").html('<img src="img/stick_'+ count +'.png" class="manImg" id="hangImg">');
+                                }
+                        }
+                        
+                      },
+                    // error: function() { 
+                    //     alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+                    // }   
+                      complete: function(data,status) { //optional, used for debugging purposes
+                          //alert(status);
+                      }
+                  });//AJAX  
+             } );//username changes
+         
+        })
+        
+    </script>
+    
+    </head>
+    <body>
+    
+       <h1>Hangman</h1> 
+        </br>
+        
+        <h4 id="insert"> Insert a Letter:  
+        <input type="text"  onkeyup="this.value = this.value.toLowerCase();" id ="letter" name="Letter" maxlength="1"/> 
+        <button id="submit">Submit</button></h4>
+        <br/>
+        <br/>
+        <guess id='guess'>Letters already guessed : </guess>
+        
+        <input type="hidden" id="wordId" >
+      
+         <div id="man">
+                <img src="img/stick_0.png" class="manImg" id="hangImg">
+        </div>
+      
+    </body>
+
+</html>
+    

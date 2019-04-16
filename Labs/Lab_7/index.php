@@ -221,10 +221,11 @@
                      },
                     success: function(data, status) {
                         // console.log(data);
-                        alert("Record inserted.")
+                        alert("Record inserted.");
                     },
                     complete: function(data, status) { //optional, used for debugging purposes
                         // console.log(data);
+                        alert("Record inserted.");
                     }
                 });
             })

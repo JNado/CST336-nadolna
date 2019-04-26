@@ -1,5 +1,4 @@
 <?php
-
 function getDatabaseConnection($dbName = 'ottermart') {
     $host = 'localhost';
     $username = 'root';
